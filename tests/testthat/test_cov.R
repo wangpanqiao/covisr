@@ -33,7 +33,7 @@ test_that("Create coverage object", {
 })
 
 
-test_that("Get contigs", cov.get_contigs{
+test_that("Get contigs", {
   expect_equal(factor(c("chr1_A", "chr2_A", "chr2_D", "chr1_D")),
                cov.get_contigs(cov_example()))
 })

@@ -127,15 +127,18 @@ cov.add_bin_idx <- function(cov, reorder=T) {
     } else{
       stop('Suba and subb should be both present for reorder')
     }
-  } 
+  }
   cov$df$bidx = 1:dim(cov$df)[1]
   return(cov)
 }
 
-
+#' if coverage object has subgenomes
 cov.has_subgenome <- function (cov) {
-  return(all(!is.null(cov$sub_suffix), !is.null(cov[cov$sub_suffix[1]]),
-             !is.null(cov[cov$sub_suffix[2]])))
+  return(all(
+    !is.null(cov[cov$sub_suffix]), 
+    !is.null(cov[cov$sub_suffix[1]]),
+    !is.null(cov[cov$sub_suffix[2]])
+  ))
 }
 
 
