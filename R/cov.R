@@ -1,19 +1,21 @@
-#' Creat new coverage object
+#' Create new coverage object
+#' 
 #' @description Create an Coverage object, with preprocessing includes
 #' a) clean up background signal
 #' b) inverse positions of contigs on the reverse strand
 #' c) reorder subgenome contigs for ease of comparsion between subgenomes
-#' @param cov_tsv coverage tsv file, either this paramter of cov_tsv must be 
+#' 
+#' @param cov_tsv coverage tsv file, either this paramter or cov_df must be 
 #' specified, if both specified, cov_tsv will be used. 
-#' @param cov_df coverage dataframe, either this paramter of cov_tsv must be 
-#' specified
+#' @param cov_df coverage dataframe
 #' @param cutoff coverage cutoff for background noise
 #' @param suba contig orders for subgenome A
 #' @param subb contig orders for subgenome B, matching that of subgenome A
 #' @param sub_suffix subgenome suffix
 #' @param first_sample_idx first sample index (1-based index) in the input tsv,
 #' default 5
-#' @return coverage object
+#' 
+#' @return an instance of a coverage object
 #' @export
 cov.init <- function (cov_tsv=NULL, cov_df=NULL, cutoff=0, prefix='output',
                       reverse_contigs=NULL, suba=NULL, subb=NULL, 
@@ -33,6 +35,7 @@ cov.init <- function (cov_tsv=NULL, cov_df=NULL, cutoff=0, prefix='output',
   cov$cutoff <- cutoff
   cov$prefix <- prefix
   cov$reverse_contigs <- reverse_contigs
+  cov$contigs <- unique(cov$df$chr)
   cov$n_samples <- dim(cov$df)[2] - first_sample_idx + 1
   cov$first_sample_idx <- first_sample_idx
   cov$sub_suffix <- sub_suffix
@@ -47,7 +50,9 @@ cov.init <- function (cov_tsv=NULL, cov_df=NULL, cutoff=0, prefix='output',
   return(cov)
 }
 
-
+#' Preprocess coverage to add sample index, bin index, filter background 
+#' coverage noise and reverse contig's physical positions when aplicable
+#' @description 
 cov.preprocess <- function(cov) {
   .is.cov(cov)
   # preprocessing
@@ -129,8 +134,8 @@ cov.add_bin_idx <- function(cov, reorder=T) {
 
 
 cov.has_subgenome <- function (cov) {
-  return(all(!is.null(cov$sub_suffix), !is.null(cov[sub_suffix[1]]),
-             !is.null(cov$sub_suffix[2])))
+  return(all(!is.null(cov$sub_suffix), !is.null(cov[cov$sub_suffix[1]]),
+             !is.null(cov[cov$sub_suffix[2]])))
 }
 
 

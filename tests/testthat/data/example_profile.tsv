@@ -1,0 +1,9 @@
+chr	start0	end0	id	sample1	sample2	sample3
+chr1_A	0	1000	chr1_A_0	1.46	2.35	2.68
+chr1_A	1000	2000	chr1_A_1	0.62	1	1.45
+chr2_A	0	1000	chr2_A_0	0.54	0.84	1.28
+chr2_A	1000	2000	chr2_A_1	0.56	0.85	1.46
+chr1_D	0	1000	chr1_D_0	0.67	1.01	1.45
+chr1_D	1000	2000	chr1_D_1	0.55	0.84	1.31
+chr2_D	0	1000	chr2_D_0	0.53	0.97	1.35
+chr2_D	1000	2000	chr2_D_1	0.48	0.82	1.2
